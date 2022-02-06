@@ -6,9 +6,8 @@ import (
 	"net/http"
 
 	"github.com/PumpkinSeed/json"
-	"gitlab.com/metricsglobal/misc-go/ctxmgr"
-	"gitlab.com/metricsglobal/misc-go/log"
-	"gitlab.com/metricsglobal/misc-go/weird"
+	"github.com/infiniteloopcloud/log"
+	"github.com/infiniteloopcloud/weird"
 )
 
 const headerContentType = "Content-Type"
@@ -122,9 +121,9 @@ func writeResponseHeaderAndBody(ctx context.Context, w http.ResponseWriter, val 
 	var data Wrapper
 	if err, ok := val.(error); ok {
 		if werr, wok := err.(weird.Error); wok && werr.Msg != "" {
-			data.Error = werr.Msg + " (" + ctxmgr.GetCorrelationID(ctx).String + ")"
+			data.Error = werr.Msg + " (" + GetCorrelationID(ctx) + ")"
 		} else {
-			data.Error = "Unknown error (" + ctxmgr.GetCorrelationID(ctx).String + ")"
+			data.Error = "Unknown error (" + GetCorrelationID(ctx) + ")"
 		}
 	} else {
 		data.Data = val

@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"os"
 
-	"gitlab.com/metricsglobal/misc-go/log"
+	"github.com/infiniteloopcloud/log"
 )
 
 const (

@@ -19,7 +19,7 @@ import (
 	"context"
 	"os"
 
-	"gitlab.com/metricsglobal/misc-go/log"
+	"github.com/infiniteloopcloud/log"
 	"gitlab.com/metricsglobal/misc-go/hyper"
 )
 
@@ -55,7 +55,7 @@ import (
 	"context"
 	"os"
 
-	"gitlab.com/metricsglobal/misc-go/log"
+	"github.com/infiniteloopcloud/log"
 	"gitlab.com/metricsglobal/misc-go/hyper"
 )
 

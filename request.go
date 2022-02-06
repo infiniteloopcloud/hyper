@@ -8,9 +8,10 @@ import (
 	"io"
 	"net/http"
 
-	"gitlab.com/metricsglobal/misc-go/ctxmgr"
-	"gitlab.com/metricsglobal/misc-go/log"
+	"github.com/infiniteloopcloud/log"
 )
+
+var contextKeys = make(map[string]log.ContextField)
 
 func checkBaseURL(baseURL string) error {
 	if baseURL == "" {
@@ -57,7 +58,7 @@ func Request(ctx context.Context, respStruct interface{}, opts RequestOpts) (*ht
 	if err != nil {
 		return nil, err
 	}
-	r.Header = ctxmgr.IntoHeader(ctx, r.Header)
+	r.Header = IntoHeader(ctx, r.Header, contextKeys)
 
 	if opts.Headers != nil {
 		for k, v := range opts.Headers {

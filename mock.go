@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"gitlab.com/metricsglobal/misc-go/log"
+	"github.com/infiniteloopcloud/log"
 )
 
 // MockReadCloser implements the io.ReadCloser interface
