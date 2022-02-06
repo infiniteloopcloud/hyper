@@ -19,8 +19,8 @@ import (
 	"context"
 	"os"
 
+	"github.com/infiniteloopcloud/hyper"
 	"github.com/infiniteloopcloud/log"
-	"gitlab.com/metricsglobal/misc-go/hyper"
 )
 
 func main() {
@@ -55,8 +55,8 @@ import (
 	"context"
 	"os"
 
+	"github.com/infiniteloopcloud/hyper"
 	"github.com/infiniteloopcloud/log"
-	"gitlab.com/metricsglobal/misc-go/hyper"
 )
 
 func main() {
@@ -107,8 +107,8 @@ package main
 
 import (
 	"net/http"
-	
-	"gitlab.com/metricsglobal/misc-go/hyper"
+
+	"github.com/infiniteloopcloud/hyper"
 )
 
 type Request struct {
@@ -154,8 +154,8 @@ package main
 
 import (
 	"net/http"
-	
-	"gitlab.com/metricsglobal/misc-go/hyper"
+
+	"github.com/infiniteloopcloud/hyper"
 )
 
 type Request struct {
@@ -187,7 +187,8 @@ package main
 
 import (
 	"context"
-	"gitlab.com/metricsglobal/misc-go/hyper"
+
+	"github.com/infiniteloopcloud/hyper"
 )
 
 type Response struct {
