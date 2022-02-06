@@ -3,9 +3,9 @@ package hyper
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"net/http"
 
-	"github.com/PumpkinSeed/json"
 	"github.com/infiniteloopcloud/log"
 	"github.com/infiniteloopcloud/weird"
 )
