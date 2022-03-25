@@ -4,7 +4,7 @@ import (
 	"net/url"
 	"strconv"
 
-	"github.com/metricsglobal/null"
+	"github.com/volatiletech/null/v9"
 )
 
 // GetQueryStringParam getting a query param if exist or return with null.String{Valid: false}
