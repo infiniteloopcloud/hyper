@@ -1,8 +1,12 @@
 package hyper
 
 import (
+	"context"
+	"fmt"
 	"net/http"
 	"sync/atomic"
+
+	"github.com/infiniteloopcloud/log"
 )
 
 // isReady defines whether the api is ready for request
@@ -42,4 +46,40 @@ func Hello(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	//nolint:errcheck
 	w.Write([]byte(`{"msg":"Hello"}`))
+}
+
+func ServiceLive(ctx context.Context, url string) error {
+	resp, err := Request(ctx, nil, RequestOpts{
+		BaseURL:  url,
+		Method:   http.MethodGet,
+		Endpoint: "/livez",
+		Client:   Client(),
+	})
+	if err != nil {
+		return err
+	}
+	if resp.StatusCode != http.StatusOK {
+		err := fmt.Errorf("invalid status code %d", resp.StatusCode)
+		log.Error(ctx, err, "service not alive error")
+		return err
+	}
+	return nil
+}
+
+func ServiceReady(ctx context.Context, url string) error {
+	resp, err := Request(ctx, nil, RequestOpts{
+		BaseURL:  url,
+		Method:   http.MethodGet,
+		Endpoint: "/readyz",
+		Client:   Client(),
+	})
+	if err != nil {
+		return err
+	}
+	if resp.StatusCode != http.StatusOK {
+		err := fmt.Errorf("invalid status code %d", resp.StatusCode)
+		log.Error(ctx, err, "service readiness error")
+		return err
+	}
+	return nil
 }

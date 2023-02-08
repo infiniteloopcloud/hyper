@@ -94,7 +94,7 @@ func Created(ctx context.Context, w http.ResponseWriter, val interface{}) {
 
 // NoContent build a no content success response
 func NoContent(ctx context.Context, w http.ResponseWriter) {
-	Generic(ctx, w, nil, http.StatusNoContent)
+	w.WriteHeader(http.StatusNoContent)
 }
 
 // Error build an error response, the HTTP status will get from the error, default 500

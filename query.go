@@ -3,6 +3,7 @@ package hyper
 import (
 	"net/url"
 	"strconv"
+	"time"
 
 	"github.com/volatiletech/null/v9"
 )
@@ -25,4 +26,16 @@ func GetQueryUint64Param(query url.Values, param string) null.Uint64 {
 		return null.Uint64From(uint64(res))
 	}
 	return null.Uint64{}
+}
+
+// GetQueryTimeParam getting a query param if exist or return with null.Time{Valid: false}
+func GetQueryTimeParam(query url.Values, param, format string) null.Time {
+	if query.Has(param) {
+		res, err := time.Parse(format, query.Get(param))
+		if err != nil {
+			return null.Time{}
+		}
+		return null.TimeFrom(res)
+	}
+	return null.Time{}
 }
