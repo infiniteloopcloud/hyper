@@ -4,8 +4,9 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
-	"github.com/infiniteloopcloud/log"
 	"net/http"
+
+	"github.com/infiniteloopcloud/log"
 )
 
 var (
@@ -16,10 +17,6 @@ var (
 var (
 	MissingRequestBody = "Missing request body"
 	InvalidRequest     = "Invalid request"
-)
-
-const (
-	CorrelationID log.ContextField = "correlation_id"
 )
 
 // Bind is binding the request body into v variable
@@ -34,7 +31,7 @@ func Bind(ctx context.Context, r *http.Request, v interface{}) error {
 }
 
 func GetCorrelationID(ctx context.Context) string {
-	ctxVal := ctx.Value(CorrelationID)
+	ctxVal := ctx.Value(log.CorrelationID)
 	if v, ok := ctxVal.(string); ok {
 		return v
 	}
