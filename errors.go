@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	"github.com/infiniteloopcloud/weird"
+	"github.com/infiniteloopcloud/go/weird"
 )
 
 func BadRequest(ctx context.Context, msg string, err error) error {

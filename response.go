@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/infiniteloopcloud/go/weird"
 	"github.com/infiniteloopcloud/log"
-	"github.com/infiniteloopcloud/weird"
 )
 
 const headerContentType = "Content-Type"
