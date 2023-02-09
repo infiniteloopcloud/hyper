@@ -28,7 +28,6 @@ func FromHeader(ctx context.Context, header http.Header, contextKeys map[string]
 
 func IntoHeader(ctx context.Context, header http.Header, contextKeys map[string]log.ContextField) http.Header {
 	h := copyHeader(header)
-
 	kv := GetValues(ctx, contextKeys)
 
 	for k := range kv {

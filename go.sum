@@ -1,5 +1,7 @@
 github.com/infiniteloopcloud/log v0.1.0 h1:CnyJJD3w99htsnQCWRhUL75RKxzJOMSo+t/8js2KF8I=
 github.com/infiniteloopcloud/log v0.1.0/go.mod h1:4Oct/9/ZDRZuLM3rI8mx5JTVAmBymDWY7XHxWCEpuKw=
+github.com/infiniteloopcloud/log v0.1.3 h1:ivirKlN4sftopoBgbXXjUqVRqioEjACpNAK2JvXizIM=
+github.com/infiniteloopcloud/log v0.1.3/go.mod h1:4Oct/9/ZDRZuLM3rI8mx5JTVAmBymDWY7XHxWCEpuKw=
 github.com/infiniteloopcloud/weird v0.1.0 h1:1pEQYxn1TnSEatEmcAu6b158S7QjCfECKRocFYGJi6s=
 github.com/infiniteloopcloud/weird v0.1.0/go.mod h1:JW/8sf7YTkgioiTue+ZFJejTt0LqBZJDgFYjBbMoCOw=
 github.com/volatiletech/null/v9 v9.0.0 h1:JCdlHEiSRVxOi7/MABiEfdsqmuj9oTV20Ao7VvZ0JkE=
