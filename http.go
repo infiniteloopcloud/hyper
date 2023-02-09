@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-const defaultAddress = ":8000"
+const defaultAddress = ":8080"
 
 var ErrMissingHandler = errors.New("missing http.Handler, pass it in the HTTP struct")
 
