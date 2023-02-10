@@ -40,6 +40,23 @@ func Readyz(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
+func ReadyzWithChecks(checks ...func(ctx context.Context) error) func(w http.ResponseWriter, r *http.Request) {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if !isReady.Load().(bool) {
+			http.Error(w, http.StatusText(http.StatusServiceUnavailable), http.StatusServiceUnavailable)
+			return
+		}
+		for _, check := range checks {
+			if err := check(r.Context()); err != nil {
+				log.Error(r.Context(), err, "check in readyz")
+				http.Error(w, http.StatusText(http.StatusServiceUnavailable), http.StatusServiceUnavailable)
+				return
+			}
+		}
+		w.WriteHeader(http.StatusOK)
+	}
+}
+
 // Hello returns http.StatusOk and the Hello response
 func Hello(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-type", "application/json")
