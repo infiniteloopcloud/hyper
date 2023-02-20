@@ -2,7 +2,6 @@ package hyper
 
 import (
 	"context"
-	"encoding/json"
 	"errors"
 	"net/http"
 
@@ -24,7 +23,7 @@ func Bind(ctx context.Context, r *http.Request, v interface{}) error {
 	if r.Body == nil {
 		return BadRequest(ctx, MissingRequestBody, ErrBindMissingBody)
 	}
-	if err := json.NewDecoder(r.Body).Decode(&v); err != nil {
+	if err := jsonEncoder.Decode(r.Body, &v); err != nil {
 		return BadRequest(ctx, InvalidRequest, errors.New(ErrBind+err.Error()))
 	}
 	return nil

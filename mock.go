@@ -3,7 +3,6 @@ package hyper
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 
 	"github.com/infiniteloopcloud/log"
 )
@@ -17,11 +16,12 @@ type MockReadCloser struct {
 func NewMockReadCloser(ctx context.Context, data interface{}) MockReadCloser {
 	buffer := bytes.Buffer{}
 	if data != nil {
-		b, err := json.Marshal(data)
+		b := new(bytes.Buffer)
+		err := jsonEncoder.Encode(b, data)
 		if err != nil {
 			log.Error(ctx, err, "error marshaling data")
 		}
-		buffer.Write(b)
+		buffer.Write(b.Bytes())
 	}
 
 	return MockReadCloser{

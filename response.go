@@ -3,7 +3,6 @@ package hyper
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"net/http"
 
 	"github.com/infiniteloopcloud/go/weird"
@@ -128,7 +127,8 @@ func writeResponseHeaderAndBody(ctx context.Context, w http.ResponseWriter, val 
 	} else {
 		data.Data = val
 	}
-	res, err := json.Marshal(data)
+	res := new(bytes.Buffer)
+	err := jsonEncoder.Encode(res, data)
 	if err != nil {
 		log.Error(ctx, err, "unable to marshal response")
 		return false
@@ -141,8 +141,8 @@ func writeResponseHeaderAndBody(ctx context.Context, w http.ResponseWriter, val 
 	// } // TODO move this out
 
 	w.WriteHeader(statusCode)
-	if res != nil {
-		_, err = w.Write(res)
+	if resBytes := res.Bytes(); resBytes != nil {
+		_, err = w.Write(resBytes)
 		if err != nil {
 			log.Error(ctx, err, "unable to write response")
 			return false
