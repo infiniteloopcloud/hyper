@@ -1,7 +1,7 @@
 package hyper
 
 import (
-	"encoding/json"
+	"bytes"
 	"net/http"
 	"os"
 
@@ -40,12 +40,13 @@ func StatusHandler(opts StatusOpts) func(w http.ResponseWriter, r *http.Request)
 			Statuses:        status,
 		}
 
-		resp, err := json.Marshal(result)
+		resp := new(bytes.Buffer)
+		err := jsonEncoder.Encode(resp, result)
 		if err != nil {
 			log.Debugf(r.Context(), "configDebug handler %s", err.Error())
 		}
 		w.WriteHeader(http.StatusOK)
-		_, err = w.Write(resp)
+		_, err = w.Write(resp.Bytes())
 		if err != nil {
 			log.Debugf(r.Context(), "configDebug handler %s", err.Error())
 		}

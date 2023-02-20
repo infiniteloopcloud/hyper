@@ -3,7 +3,6 @@ package hyper
 import (
 	"bytes"
 	"context"
-	"encoding/json"
 	"errors"
 	"io"
 	"net/http"
@@ -47,7 +46,7 @@ func Request(ctx context.Context, respStruct interface{}, opts RequestOpts) (*ht
 		r, err = http.NewRequest(opts.Method, endpoint(opts.BaseURL, opts.Endpoint), req)
 	} else if opts.Request != nil {
 		b := new(bytes.Buffer)
-		if err := json.NewEncoder(b).Encode(opts.Request); err != nil {
+		if err := jsonEncoder.Encode(b, opts.Request); err != nil {
 			return nil, err
 		}
 		r, err = http.NewRequest(opts.Method, endpoint(opts.BaseURL, opts.Endpoint), b)
@@ -74,7 +73,7 @@ func Request(ctx context.Context, respStruct interface{}, opts RequestOpts) (*ht
 	}
 
 	if respStruct != nil {
-		if err := json.NewDecoder(resp.Body).Decode(respStruct); err != nil {
+		if err := jsonEncoder.Decode(resp.Body, respStruct); err != nil {
 			return nil, err
 		}
 	}
