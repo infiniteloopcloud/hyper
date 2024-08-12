@@ -82,7 +82,9 @@ func Request(ctx context.Context, respStruct interface{}, opts RequestOpts) (*ht
 }
 
 func SilentProxy(ctx context.Context, w http.ResponseWriter, resp *http.Response) {
-	w.Header().Set("Content-Type", "application/json")
+	if w.Header().Get("Content-Type") == "" {
+		w.Header().Set("Content-Type", "application/json")
+	}
 
 	for key, valueSlice := range resp.Header {
 		for _, v := range valueSlice {
